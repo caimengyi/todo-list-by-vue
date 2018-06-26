@@ -2,7 +2,7 @@
   <div id="app" v-bind:style="appStyle">
     <div id="header" v-bind:style="headerStyle">
       <div v-if="!skinShow" class="icon icon-menu" v-on:click="showSidebar"></div>
-      <div v-if="skinShow" class="icon icon-cheveron-left" v-on:click="skinOut"></div>
+      <div v-if="skinShow" class="icon icon-cheveron-left" v-on:click="moveOut"></div>
       <h1>Todo-List </h1>
     </div>
 
@@ -11,7 +11,7 @@
             <li class="icon-options icon-time" v-on:click="changetoTodo">待做事项</li>
             <li class="icon-options icon-clipboard" v-on:click="changetoDone">完成事项</li>
             <li class="icon-options icon-apparel" v-on:click="changetoSkin">皮肤</li>
-            <li class="icon-options icon-information-outline">关于</li>
+            <li class="icon-options icon-information-outline" v-on:click="changetoAbout">关于</li>
         </ul>
     </div>
 
@@ -46,6 +46,11 @@
               <li v-on:click="changeRed">热情火<span class="red"></span><span class="lightred"></span></li>
               <li v-on:click="changeBlue">天空蓝<span class="blue"></span><span class="lightblue"></span></li>
           </ul>
+
+          <div class="aboutme" v-bind:style="aboutStyle">
+            <h2>这是一个任务清单</h2>
+            <p>制作人：@2018 <a href="###">Sherry</a></p>
+          </div>
 
       </div>
 
@@ -85,6 +90,9 @@ export default {
       },
       skinStyle: {
         display: 'none'
+      },
+      aboutStyle: {
+        display:'none'
       }
 
     }
@@ -106,6 +114,7 @@ export default {
           this.addButton = true;
           this.headerStyle.display = 'block';
           this.ulStyle.display = 'block';
+          this.type='todo';
       }
 
     },
@@ -171,8 +180,15 @@ export default {
       this.sidebarStyle.display = 'none';
       this.skinShow = true;
     },
-    skinOut: function(){
+    changetoAbout: function(){
+      this.aboutStyle.display = 'block';
+      this.ulStyle.opacity = 0.1;
+      this.sidebarStyle.display = 'none';
+      this.skinShow = true;
+    },
+    moveOut: function(){
       this.skinStyle.display = 'none';
+      this.aboutStyle.display='none';
       this.ulStyle.opacity = 1;
       this.appStyle.backgroundColor = '#ececeb';
       this.skinShow = false;
@@ -243,11 +259,16 @@ export default {
   z-index:70;
 }
 
+#header h1 {
+  font-size:32px;
+  color:white;
+}
+
 #sidebar {
   position:absolute;
   top:0px;
   left:0px;
-  width:300px;
+  width:250px;
   height:100%;
   background-color:white;
   display:block;
@@ -260,11 +281,10 @@ export default {
 }
 
 
-
 #sidebar ul li{
   list-style:none;
   padding:25px;
-  font-size:20px;
+  font-size:18px;
   text-align:left;
   font-color:#ccc;
   margin:0px;
@@ -283,12 +303,12 @@ export default {
 }
 
 .add {
-  width:80px;
-  height:80px;
+  width:70px;
+  height:70px;
   border-radius:50%;
   background-color:#f9ce00;
   text-align:center;
-  line-height:80px;
+  line-height:70px;
   font-size:50px;
   font-weight:10px;
   color:white;
@@ -296,13 +316,13 @@ export default {
 }
 
 #confirm {
-  width:70px;
-  height:70px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   background-color:#7f7f7f;
   text-align:center;
-  line-height:70px;
-  font-size:20px;
+  line-height:60px;
+  font-size:18px;
   font-weight:10px;
   color:white;
   cursor:pointer;
@@ -324,7 +344,7 @@ export default {
   width:90%;
   height:70px;
   border:none;
-  font-size:28px;
+  font-size:24px;
   top:120px;
   border-bottom:#aaa 3px solid;
   outline:none;
@@ -341,7 +361,7 @@ export default {
   width:90%;
   height:60px;
   line-height:60px;
-  font-size:24px;
+  font-size:20px;
   background-color:white;
   padding:10px 20px; 
   list-style:none;
@@ -370,14 +390,14 @@ export default {
   right:30px;
 }
 
-.changeskin {
+.changeskin,.aboutme {
   position:absolute;
   top:160px;
   padding:30px 60px;
   background-color:white;
   width:80%;
   left:4%;
-  font-size:20px;
+  font-size:18px;
   margin:0px;
 }
 
@@ -391,7 +411,7 @@ export default {
 }
 
 .changeskin li span {
-  padding:0px 22px;
+  padding:0px 18px;
   margin:20px 0px;
   position:relative;
   left:70%;
@@ -428,6 +448,14 @@ export default {
   border-radius:0 40% 40% 0;
 }
 
+.aboutme {
+  text-align:center;
+}
+
+.aboutme a{
+  text-decoration:none;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('fonts/icomoon.eot?9pala9');
@@ -447,7 +475,7 @@ export default {
   font-variant: normal;
   text-transform: none;
   line-height: 80px;
-  font-size:40px;
+  font-size:32px;
   position:absolute;
   left:5%;
 
