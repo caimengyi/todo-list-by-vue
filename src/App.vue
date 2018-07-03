@@ -49,6 +49,7 @@
 
           <div class="aboutme" v-bind:style="aboutStyle">
             <h2>这是一个任务清单</h2>
+            <p>我的第一个Vue程序</p>
             <p>制作人：@2018 <a href="###">Sherry</a></p>
           </div>
 
