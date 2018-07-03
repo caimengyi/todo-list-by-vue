@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+The site is published at https://caimengyi.github.io/todo-list-by-vue/
+
 ## Build Setup
 
 ``` bash
